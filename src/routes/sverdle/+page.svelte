@@ -1,17 +1,9 @@
 <script lang="ts">
-	import { theme } from '$lib/stores/theme.js';
-
-	// Reactive statement that updates the body class whenever theme changes
-	$: {
-		if (typeof window !== 'undefined') {
-			document.body.className = $theme;
-		}
-	}
-
 	import { confetti } from '@neoconfetti/svelte';
 	import { enhance } from '$app/forms';
 	import type { PageData, ActionData } from './$types';
 	import { reduced_motion } from './reduced-motion';
+	import GlobalTheme from "$lib/GlobalTheme.svelte";
 
 	export let data: PageData;
 
@@ -94,6 +86,7 @@
 	}
 </script>
 
+<GlobalTheme />
 <svelte:window on:keydown={keydown} />
 
 <svelte:head>
@@ -416,19 +409,5 @@
 		100% {
 			transform: translateX(0);
 		}
-	}
-
-	:global(body) {
-		transition: background-color 0.3s, color 0.3s;
-	}
-
-	:global(body.light) {
-		background-color: var(--light-background-color);
-		color: var(--light-text-color);
-	}
-
-	:global(body.dark) {
-		background-color: var(--dark-background-color);
-		color: var(--dark-text-color);
 	}
 </style>

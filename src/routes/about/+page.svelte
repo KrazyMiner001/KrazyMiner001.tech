@@ -1,7 +1,7 @@
 <script>
 	import { theme } from '$lib/stores/theme.js';
 
-	// Reactive statement that updates the body class whenever theme changes
+	// Reactive statement that updates the body class whenever theme changes or page is loaded/refreshed
 	$: {
 		if (typeof window !== 'undefined') {
 			document.body.className = $theme;

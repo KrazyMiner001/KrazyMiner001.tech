@@ -34,7 +34,6 @@ p {
 }
 
 a {
-	color: var(--color-theme-1);
 	text-decoration: none;
 }
 
@@ -97,3 +96,4 @@ button:focus:not(:focus-visible) {
 	width: 1px;
 	white-space: nowrap;
 }
+
