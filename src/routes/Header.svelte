@@ -86,6 +86,10 @@
 		justify-content: center;
 	}
 
+	:global(body) nav {
+		transition: --background 0.3s;
+	}
+
 	:global(body.dark) nav {
 		--background: rgba(0, 0, 0, 0.7);
 	}
@@ -139,13 +143,24 @@
 		height: 100%;
 		align-items: center;
 		padding: 0 0.5rem;
-		color: var(--color-text);
 		font-weight: 700;
 		font-size: 0.8rem;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		text-decoration: none;
 		transition: color 0.2s linear;
+	}
+
+	:global(body) nav a {
+		transition: color 0.3s;
+	}
+
+	:global(body.dark) nav a {
+		color: var(--dark-text-color);
+	}
+
+	:global(body.light) nav a {
+		color: var(--light-text-color);
 	}
 
 	a:hover {

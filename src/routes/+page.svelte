@@ -21,11 +21,11 @@
 
 	:global(body.light) {
 		background-color: var(--light-background-color);
-		color: var(--light-color);
+		color: var(--light-text-color);
 	}
 
 	:global(body.dark) {
 		background-color: var(--dark-background-color);
-		color: var(--dark-color);
+		color: var(--dark-text-color);
 	}
 </style>
