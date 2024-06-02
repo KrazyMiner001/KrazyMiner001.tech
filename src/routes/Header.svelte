@@ -1,32 +1,34 @@
 <script>
 	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
-	import { darkMode } from '../stores/theme.js';
+	import { theme } from '$lib/stores/theme.js';
 	import github_mark from '$lib/images/github_mark.svg';
 	import github_mark_white from '$lib/images/github_mark_white.svg';
-	import Button from './Button.svelte';
 	import darkThemeMoon from '$lib/images/dark_theme_moon.svg';
 	import lightThemeSun from '$lib/images/light_theme_sun.svg';
 	let github = github_mark;
-	let themeSymbol = darkThemeMoon;
+	let themeSymbol = lightThemeSun;
 
-	// Reactive statement that updates the GitHub logo whenever darkMode changes
+	// Reactive statement that updates the GitHub logo and theme symbol whenever theme changes
 	$: {
-		if ($darkMode) {
-			github = github_mark;
-			themeSymbol = lightThemeSun;
-		} else {
+		if ($theme === 'dark') {
 			github = github_mark_white;
 			themeSymbol = darkThemeMoon;
+		} else {
+			github = github_mark;
+			themeSymbol = lightThemeSun;
 		}
+	}
+
+	function toggleTheme() {
+		theme.update(value => value === 'dark' ? 'light' : 'dark');
 	}
 </script>
 
 <header>
 	<div class="corner">
-		<Button>
+		<button on:click={toggleTheme}>
 			<img src={themeSymbol} alt="Change Theme" />
-		</Button>
+		</button>
 	</div>
 
 	<nav>
@@ -68,20 +70,27 @@
 	}
 
 	.corner img {
-		width: 2.5em;
-		height: 2.5em;
+		width: 2em;
+		height: 2em;
 		object-fit: contain;
 	}
 
 	.corner Button img {
-		width: 2.5em;
-		height: 2.5em;
+		width: 2em;
+		height: 2em;
 		object-fit: contain;
 	}
 
 	nav {
 		display: flex;
 		justify-content: center;
+	}
+
+	:global(body.dark) nav {
+		--background: rgba(0, 0, 0, 0.7);
+	}
+
+	:global(body.light) nav {
 		--background: rgba(255, 255, 255, 0.7);
 	}
 
@@ -141,5 +150,12 @@
 
 	a:hover {
 		color: var(--color-theme-1);
+	}
+
+	button {
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+		padding: 0;
 	}
 </style>

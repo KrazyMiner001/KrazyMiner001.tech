@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { darkMode } from '../stores/theme.js';
+    import { darkMode } from '$lib/stores/theme.js';
 
     function toggle() {
         darkMode.update((value: boolean) => !value);

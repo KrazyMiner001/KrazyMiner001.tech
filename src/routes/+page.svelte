@@ -1,5 +1,12 @@
 <script>
+	import { theme } from '$lib/stores/theme.js';
 
+	// Reactive statement that updates the body class whenever theme changes
+	$: {
+		if (typeof window !== 'undefined') {
+			document.body.className = $theme;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -8,14 +15,17 @@
 </svelte:head>
 
 <style>
-	:global(body.dark-mode) {
-		background-color: #1d3040;
-		color: #bfc2c7;
+	:global(body) {
+		transition: background-color 0.3s, color 0.3s;
 	}
 
-	:global(body) {
-		background-color: rgb(202, 216, 228);
-		color: #0084f6;
-		transition: background-color 0.3s
+	:global(body.light) {
+		background-color: var(--light-background-color);
+		color: var(--light-color);
+	}
+
+	:global(body.dark) {
+		background-color: var(--dark-background-color);
+		color: var(--dark-color);
 	}
 </style>
