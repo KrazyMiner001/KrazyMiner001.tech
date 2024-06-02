@@ -1,14 +1,32 @@
 <script>
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
-	import github from '$lib/images/github.svg';
+	import { darkMode } from '../stores/theme.js';
+	import github_mark from '$lib/images/github_mark.svg';
+	import github_mark_white from '$lib/images/github_mark_white.svg';
+	import Button from './Button.svelte';
+	import darkThemeMoon from '$lib/images/dark_theme_moon.svg';
+	import lightThemeSun from '$lib/images/light_theme_sun.svg';
+	let github = github_mark;
+	let themeSymbol = darkThemeMoon;
+
+	// Reactive statement that updates the GitHub logo whenever darkMode changes
+	$: {
+		if ($darkMode) {
+			github = github_mark;
+			themeSymbol = lightThemeSun;
+		} else {
+			github = github_mark_white;
+			themeSymbol = darkThemeMoon;
+		}
+	}
 </script>
 
 <header>
 	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
-		</a>
+		<Button>
+			<img src={themeSymbol} alt="Change Theme" />
+		</Button>
 	</div>
 
 	<nav>
@@ -32,7 +50,7 @@
 	</nav>
 
 	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
+		<a href="https://github.com/KrazyMiner001/KrazyMiner001.tech">
 			<img src={github} alt="GitHub" />
 		</a>
 	</div>
@@ -45,21 +63,19 @@
 	}
 
 	.corner {
-		width: 3em;
-		height: 3em;
-	}
-
-	.corner a {
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
 	}
 
 	.corner img {
-		width: 2em;
-		height: 2em;
+		width: 2.5em;
+		height: 2.5em;
+		object-fit: contain;
+	}
+
+	.corner Button img {
+		width: 2.5em;
+		height: 2.5em;
 		object-fit: contain;
 	}
 
